@@ -14,3 +14,4 @@ export const Icon = (props:IconPropsType) => {
     </svg>
   );
 };
+
