@@ -19,9 +19,9 @@ export const Works = () => {
 
         <FlexWrapper justify={"space-between"} align={"flex-start"}>
           <WorkCard title={"Social Network"} src={socialImg}
-                    text={"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim. Lorem ipsum dolor sit amet, consectetur adipisicing elit."}/>
+                    text={"A modern social networking platform built with React and TypeScript. Features include user authentication, real-time messaging, profile customization, and a responsive design that works seamlessly across all devices."}/>
           <WorkCard title={"Timer"} src={timerImg}
-                    text={"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim. Lorem ipsum dolor sit amet, consectetur adipisicing elit."}/>
+                    text={"An intuitive productivity timer application designed to help users manage their time effectively. Built with React and styled-components, featuring customizable intervals, visual progress indicators, and sound notifications."}/>
         </FlexWrapper>
       </Container>
     </StyledWorks>

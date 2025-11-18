@@ -1,13 +1,13 @@
 export const theme = {
   colors: {
-    primaryBg: "#1F1F20",
-    secondaryBg: "#252527",
-    accent: "#7572D5",
+    primaryBg: "#0A0E27",
+    secondaryBg: "#14182E",
+    accent: "#00D9FF",
 
-    font: "#fff",
+    font: "#FFFFFF",
 
-    borderColor: "#4A4A4A",
+    borderColor: "#2D3142",
 
-    placeholderColor: "#495057"
+    placeholderColor: "#6B7280"
   }
 }

@@ -7,9 +7,7 @@ export const Slider = () => {
     <StyledSlider>
       <FlexWrapper>
         <Slide>
-          <Text>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua Ut enim. Lorem ipsum dolor sit amet, consectetur adipisicing elit ut labore et dolore
-            magna aliqua Ut enim</Text>
+          <Text>Working with Vladimir has been an absolute pleasure. His attention to detail and commitment to delivering high-quality code is exceptional. He consistently goes above and beyond to ensure projects are completed on time and exceed expectations.</Text>
           <Name>@vladimir kim</Name>
         </Slide>
       </FlexWrapper>
