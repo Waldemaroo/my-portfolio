@@ -2,29 +2,33 @@ import styled from "styled-components";
 import {theme} from "../styles/Theme.tsx";
 
 export const Link = styled.a`
-    font-weight: 400;
+    font-weight: 500;
     font-size: 14px;
     letter-spacing: 1px;
     text-transform: uppercase;
-    padding: 10px;
+    padding: 8px 12px;
     position: relative;
     z-index: 0;
-    
-    &:hover{
-        &::before{
-            height: 10px;
-        }
-    }
+    color: ${theme.colors.accent};
+    transition: ${theme.animations.transition};
     
     &::before {
         content: "";
-        display: inline-block;
-        background-color: ${theme.colors.accent};
-        
         position: absolute;
-        bottom: 5px;
+        bottom: 0;
         left: 0;
-        right: 0;
+        width: 0;
+        height: 2px;
+        background: ${theme.colors.accent};
+        transition: ${theme.animations.transition};
         z-index: -1;
+    }
+    
+    &:hover {
+        color: ${theme.colors.accentHover};
+        
+        &::before {
+            width: 100%;
+        }
     }
 `

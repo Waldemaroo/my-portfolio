@@ -5,9 +5,13 @@ import {theme} from "../../styles/Theme.tsx";
 export const Slider = () => {
   return (
     <StyledSlider>
-      <FlexWrapper>
+      <FlexWrapper direction="column" align="center" gap="30px">
         <Slide>
-          <Text>Working with Vladimir has been an absolute pleasure. His attention to detail and commitment to delivering high-quality code is exceptional. He consistently goes above and beyond to ensure projects are completed on time and exceed expectations.</Text>
+          <Text>
+            "Working with Vladimir has been an absolute pleasure. His attention to detail 
+            and commitment to delivering high-quality code is exceptional. He consistently 
+            goes above and beyond to ensure projects are completed on time and exceed expectations."
+          </Text>
           <Name>@vladimir kim</Name>
         </Slide>
       </FlexWrapper>
@@ -21,7 +25,7 @@ export const Slider = () => {
 };
 
 const StyledSlider = styled.div`
-    max-width: 500px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -29,35 +33,68 @@ const StyledSlider = styled.div`
 
 const Slide = styled.div`
     text-align: center;
+    width: 100%;
 `
-const Text = styled.p`
 
+const Text = styled.p`
+    font-size: 18px;
+    line-height: 1.8;
+    color: ${theme.colors.fontSecondary};
+    font-style: italic;
+    margin: 0;
+
+    @media ${theme.media.tablet} {
+        font-size: 16px;
+    }
 `
+
 const Name = styled.span`
     font-family: 'Josefin Sans', 'sans-serif';
     font-weight: 600;
-    font-size: 16px;
-    letter-spacing: 1px;
+    font-size: 18px;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    margin: 22px 0 42px;
+    margin-top: 24px;
     display: inline-block;
-
+    color: ${theme.colors.accent};
+    position: relative;
+    
+    &::before {
+        content: "";
+        position: absolute;
+        left: -30px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 2px;
+        background: ${theme.colors.accent};
+    }
 `
+
 const Pagination = styled.div`
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-top: 10px;
+    
     span {
         display: inline-block;
-        width: 7px;
-        height: 7px;
-        background-color: rgba(255, 255, 255, 0.5);
-        border-radius: 20px;
-
-        & + span {
-            margin-left: 5px;
-        }
+        width: 8px;
+        height: 8px;
+        background-color: ${theme.colors.borderColor};
+        border-radius: 50%;
+        transition: ${theme.animations.transition};
+        cursor: pointer;
 
         &.active {
-            background-color: ${theme.colors.accent};
-            width: 20px;
+            background: ${theme.colors.accent};
+            width: 32px;
+            height: 8px;
+            border-radius: 4px;
+        }
+
+        &:hover:not(.active) {
+            background-color: ${theme.colors.fontMuted};
         }
     }
 `

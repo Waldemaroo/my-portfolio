@@ -1,96 +1,82 @@
 import styled from "styled-components";
 import {theme} from "../../../styles/Theme.tsx";
+import {scrollToSection, formatSectionId} from "../../../utils/scroll.ts";
 
-export const HeaderMenu = (props : {menuItems : Array<string>}) => {
+interface HeaderMenuProps {
+  menuItems: string[];
+}
+
+export const HeaderMenu = ({menuItems}: HeaderMenuProps) => {
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, item: string) => {
+    e.preventDefault();
+    scrollToSection(formatSectionId(item));
+  };
+
   return (
-    <div>
-      <StyledHeaderMenu>
-        <ul>
-          {props.menuItems.map((item, index)=>{
-            return <ListItem key={index}>
-              <Link href="">{item}
-              <Mask>
-                <span>{item}</span>
-              </Mask>
-              <Mask>
-                <span>{item}</span>
-              </Mask>
-              </Link>
-            </ListItem>
-          })}
-        </ul>
-      </StyledHeaderMenu>
-    </div>
+    <StyledHeaderMenu>
+      <MenuList>
+        {menuItems.map((item, index) => (
+          <MenuItem key={index}>
+            <MenuLink 
+              href={`#${formatSectionId(item)}`}
+              onClick={(e) => handleClick(e, item)}
+            >
+              {item}
+            </MenuLink>
+          </MenuItem>
+        ))}
+      </MenuList>
+    </StyledHeaderMenu>
   );
 };
 
 const StyledHeaderMenu = styled.nav`
-    ul {
-       display: flex;
-       gap: 30px; 
-        justify-content: center;
+    @media ${theme.media.tablet} {
+        display: none;
     }
 `
 
-
-
-const Link = styled.a`
-    font-family: 'Josefin Sans', 'sans-serif';
-    font-weight: 400;
-    font-size: 30px;
-    text-align: center;
-    color: transparent;
-`
-
-const Mask = styled.span`
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: inline-block;
-    height: 50%;
-    overflow: hidden;
-    //outline: 1px solid red;
-    color: ${theme.colors.accent};
+const MenuList = styled.ul`
+    display: flex;
+    gap: 40px;
+    align-items: center;
     
-    & + & {
-    top: 50%;
-        span {
-            display: inline-block;
-            transform: translateY(-50%);
-        }
-    }       
+    @media ${theme.media.tablet} {
+        gap: 20px;
+    }
 `
 
-const ListItem = styled.li`
+const MenuItem = styled.li`
     position: relative;
-    
-    &::before{
-       content: "";
-        display: inline-block;
-        height: 3px;
-        background-color: ${theme.colors.accent};
+`
 
+const MenuLink = styled.a`
+    font-family: 'Josefin Sans', 'sans-serif';
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: ${theme.colors.font};
+    position: relative;
+    padding: 8px 0;
+    transition: ${theme.animations.transition};
+    
+    &::after {
+        content: "";
         position: absolute;
-        top: 50%;
-        left: -10px;
-        right: -10px;
-        z-index: 1;
-        
-        transform: scale(0);
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: ${theme.colors.accent};
+        transition: ${theme.animations.transition};
     }
     
-    &:hover{
-        &::before{
-            transform: scale(1);
-        }
+    &:hover {
+        color: ${theme.colors.accent};
         
-        ${Mask} {
-            transform: skew(12deg) translateX(5px);
-            color: ${theme.colors.font};
-            
-            & + ${Mask} {
-                transform: skew(12deg) translateX(-5px);
-            }
+        &::after {
+            width: 100%;
         }
     }
 `

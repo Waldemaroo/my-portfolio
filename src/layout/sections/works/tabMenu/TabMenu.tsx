@@ -1,32 +1,80 @@
 import styled from "styled-components";
-import {Link} from "../../../../components/Link.tsx";
+import {theme} from "../../../../styles/Theme.tsx";
+import {useState} from "react";
 
-export const TabMenu = (props : {menuItems : Array<string>}) => {
+interface TabMenuProps {
+  menuItems: string[];
+}
+
+export const TabMenu = ({menuItems}: TabMenuProps) => {
+  const [activeTab, setActiveTab] = useState(0);
+
   return (
-    <div>
-      <StyledTabMenu>
-        <ul>
-          {props.menuItems.map((item, index)=>{
-            return <ListItem key={index}>
-                <Link href="">{item}</Link>
-            </ListItem>
-          })}
-        </ul>
-      </StyledTabMenu>
-    </div>
+    <StyledTabMenu>
+      <TabList>
+        {menuItems.map((item, index) => (
+          <TabItem key={index}>
+            <TabButton 
+              active={activeTab === index}
+              onClick={() => setActiveTab(index)}
+            >
+              {item}
+            </TabButton>
+          </TabItem>
+        ))}
+      </TabList>
+    </StyledTabMenu>
   );
 };
 
 const StyledTabMenu = styled.nav`
-    margin-bottom: 40px;
-    ul {
+    margin-bottom: 50px;
        display: flex;
-       gap: 20px;
         justify-content: center;
+    
+    @media ${theme.media.tablet} {
+        margin-bottom: 40px;
     }
 `
 
-const ListItem = styled.li`
+const TabList = styled.ul`
+    display: flex;
+    gap: 8px;
+    background: ${theme.colors.tertiaryBg};
+    padding: 6px;
+    border-radius: 8px;
+    border: 1px solid ${theme.colors.borderColor};
+    flex-wrap: wrap;
+    justify-content: center;
+`
 
+const TabItem = styled.li`
+    list-style: none;
+`
+
+const TabButton = styled.button<{active: boolean}>`
+    padding: 10px 24px;
+    font-family: 'Josefin Sans', 'sans-serif';
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: ${props => props.active ? theme.colors.font : theme.colors.fontSecondary};
+    background: ${props => props.active ? theme.colors.accent : 'transparent'};
+    border-radius: 6px;
+    transition: ${theme.animations.transition};
+    position: relative;
+    
+    &:hover {
+        color: ${theme.colors.font};
+        ${props => !props.active && `
+            background: ${theme.colors.secondaryBg};
+        `}
+    }
+    
+    @media ${theme.media.mobile} {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
 `
 
